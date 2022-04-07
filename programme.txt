@@ -1,0 +1,23 @@
+#include<iostream>
+using namespace std;
+namespace abc{
+    int number = 45;
+    void fun(){
+        cout<<"i am from abc block";
+    }
+  }
+  namespace xyz{
+      float number = 12.22;
+      void fun(){
+          cout<<"I am from xyz block";
+      }
+  }
+    int number = 50;
+    int main()
+    {
+        cout<<abc::number;
+        xyz::fun();
+        abc::fun();
+        return 0;
+        
+    }
