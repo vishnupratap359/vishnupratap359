@@ -8,7 +8,7 @@ public:
 	 }
 	 void sample1();
 	 };
-	 void A::sample()
+	 void A::sample1()
 	  {
 	  cout<<"sample1";
 	  };
@@ -18,6 +18,6 @@ public:
 	   A obj;
 	   obj.sample();
 	   cout<<endl;
-	   obj.simple();
+	   obj.sample1();
 	   getch();
 	   }
