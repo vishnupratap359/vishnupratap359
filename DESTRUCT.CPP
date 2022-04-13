@@ -1,37 +1,25 @@
 #include<iostream.h>
 #include<conio.h>
-class demo {
-	       float basicsalary,totalsalary,leave,onedaysalary,workingdays;
- public:
-	 demo()
-       {
-	 cout<<"welcome to salary manager  software"<<endl;
-	 }
-
-      void getinfo()
-    {
-       cout<<"enter your basic salary :";
-       cin>>basicsalary;
-       cout<<endl<<"enter your total leave :";
-       cin>>leave;
-
-	onedaysalary = basicsalary/30;
-	workingdays = 30 - leave;
-	totalsalary = workingdays*onedaysalary;
-
-	cout<<endl<<"you will get : "<<totalsalary<<"rupees";
+int a=0;
+class complex {
+public:
+	complex(){
+	a++;
+	cout<<"const running"<<a;
 	}
-
-	~demo()
-       {
-	 cout<<endl<<endl;
-	 cout<<"thanks for using this software ";
-	}
-    };
-       void main()
-     {
-	clrscr();
-	 demo obj;
-	 obj.getinfo();
-	 getch();
-       }
+	~complex()
+	{
+	  cout<<"distructor is working"<<a;
+	  a--;
+	  }
+	  };
+	  void main()
+	  {
+	   complex m1;
+	   {
+	   cout<<"local block entry"<<endl;
+	   complex m2,m3;
+	   cout<<"back to main program"<<endl;
+	   }
+	   getch();
+	   }
