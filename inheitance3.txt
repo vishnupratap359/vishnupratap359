@@ -1,0 +1,64 @@
+include<iostream>
+using namespace std;
+ 
+ class student{
+    protected:
+               int roll_no;
+           public:
+            void set(int x){
+                roll_no=x;
+            }
+               void get(){
+                   cout<<"Rollno"<<roll_no<<endl;
+               }
+ };
+ //***************************test***************************
+ class test:virtual public student{
+protected:
+           int english,hindi;
+public:
+        void get_marks(int x, int y){
+            english=x;
+            hindi=y;
+        }
+        void put(){
+            cout<<"Hindi"<<hindi<<endl;
+            cout<<"English"<<english<<endl;
+        }
+ };
+  class sport: virtual public student{
+      protected:
+                 int marks;
+    public:
+            void set1(int x){
+                marks=x;
+                
+            }
+            void get1(){
+                cout<<"marks of sports"<<marks<<endl;
+                
+            }
+  };
+  class result:public test,public sport{
+      private:
+               int sum;
+     public:
+               void total()
+               {
+                   sum = hindi+english+marks;
+                   get();
+                   put();
+                   get1();
+                   cout<<"total"<<sum;
+               }
+  };
+  int main(){
+      result object;
+      object.set(200);
+      object.get_marks(82,87);
+      object.set1(50);
+      object.total();
+      return 0;
+      
+  }
+  
