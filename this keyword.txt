@@ -1,0 +1,25 @@
+#include <iostream>
+
+using namespace std;
+
+class simple{
+    int a,b;          //instance variable
+    public:
+    void get (int a,int b)
+    {
+        this->a= a;
+        this->b= b;
+        
+    }
+      void put(){
+          
+          cout<<a<<b;
+      }
+};
+  int main(){
+      simple o;
+      o.get(11,12);
+      o.put();
+      return 0;
+      
+  }
