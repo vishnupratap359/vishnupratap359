@@ -1,0 +1,29 @@
+#include<iostream>
+using namespace std;
+
+class A{
+protected:
+          int value;
+public:
+       A()
+       {
+           value = 0;
+       }
+    A(int x){
+        value = x;
+    }
+     void pdata(){
+         cout<<"A"<<value;
+     }
+     void operator ++(){
+         value=value/ 100*200+20;
+     }
+};
+   
+   int main()
+   {
+       A obj(200);
+       ++obj;
+       obj.pdata();
+       return 0;
+   }
