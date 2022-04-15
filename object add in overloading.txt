@@ -1,0 +1,31 @@
+#include<iostream>
+using namespace std;
+
+class A{
+    public:
+            int num1,num2;
+    A(){num1=num2=0;}
+    A(int x, int y){
+        num1=x;
+        num2=y;
+    }
+    void pdata(){
+        cout<<"Number  "<<num1<<endl<<"Number2   "<<num2;
+    }
+    A operator +(A &obj)
+    {
+        A temp;
+        temp.num1=num1+obj.num1;
+        temp.num2=num2+obj.num2;
+        return temp;
+    }
+};
+  int main()
+  {
+      A m1(1,1);
+      A m2(2,2);
+      A m3(2,2);
+      A result=(m1+m2+m3);
+      result.pdata();
+      return 0;
+  }
