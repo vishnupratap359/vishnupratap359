@@ -1,0 +1,32 @@
+#include <iostream>
+#include<cmath>
+using namespace std;
+
+int linear(int arr[],int size,int key){
+         int counter=0;
+for(int i=0;i<size;i++)
+{
+    if(arr[i]==key)
+    {
+     return i+1;
+    }
+
+    
+}
+return -1;
+}
+
+int main()
+{
+    
+    double m=4.9;
+    int m1;
+    int arr[]={45,46,52,42,65,74,69,36};     
+    int size=sizeof(arr)/sizeof(int);
+     int key;
+     cin>>key;
+     int result;
+     cout<<linear(arr,size,key);
+     
+     return 0;
+}
