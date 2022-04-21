@@ -1,0 +1,52 @@
+#include<iostream>
+using namespace std;
+
+void swap(int*,int*);
+void bubble(int arr[],int n)
+{
+    int i,j,temp,count;
+    for(i=0;i<n-1;i++)
+    {
+        for(j=0;j<n-1-i;j++)
+        {
+            count=0;
+            if(arr[j]>arr[j+1])
+            {
+                swap(&arr[j],&arr[j+1]);
+                count=1;
+            }
+        }
+        if(count==0)
+            
+        break;
+    }
+    
+
+for(i=0;i<n;i++)
+
+cout<<arr[i]<<",";
+
+}
+void swap(int *x,int *y)
+{
+    int temp;
+    temp=*x;
+    *x=*y;
+    *y=temp;
+
+}
+
+ int main()
+ {
+     int arr[15];
+     int size;
+     cout<<"enter the size";
+     cin>>size;
+     for(int i=0;i<size;i++)
+     {
+         cin>>arr[i];
+         
+     }
+     bubble(arr,size);
+     return 0;
+ }
