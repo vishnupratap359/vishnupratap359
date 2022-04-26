@@ -1,0 +1,89 @@
+#include <iostream>
+
+using namespace std;
+
+void print(int *a,int n){
+
+    for(int x=0; x<n; x++)
+    {
+         cout<<a[x]<<" ";
+   }
+}
+ //*****************conquer***********************************
+ void conq(int *a,int low,int mid,int high)      //finding the smallest element 
+ {
+    int i,j,x,dupli[200]; 
+     dupli[high-low+1];
+     i=low;
+     j=mid+1;
+     x=low;
+    while(i<=mid && j<=high)
+    {
+        if(a[i]<a[j])
+        {
+            
+      dupli[x] = a[i] ;
+      x++;
+      i++;
+      
+       }
+ 
+ else
+ {
+    dupli[x]=a[j] ;
+     x++;
+     j++;
+     
+ }
+}
+
+
+
+    while(i<=mid)
+    {
+        dupli[x]=a[i];
+        x++;
+        i++;
+    }
+    while(j<=high)
+    {
+        dupli[x]=a[j];
+        x++;
+        j++;
+        
+    }
+    for(int temp=low;temp<=high;temp++)
+    {
+        
+        a[temp]=dupli[temp];
+        
+    }
+    }
+    //**********************merquesort***********************************
+    void mergesort(int *a,int low,int high)
+    {
+        int mid;
+        if(low<high)
+        {
+            mid=(low+high)/2;
+            mergesort(a,low,mid);
+            mergesort(a,mid+1,high);
+            conq(a,low,mid,high);
+        }
+    }    
+            //**************************int main*********************************
+            int main()
+                {
+                    int n;
+                int arr[]={9,8,7,6,5,4,3,2,1};
+                     n=sizeof(arr)/sizeof(int);
+                    mergesort(arr,0,n-1);
+                   
+    
+                    cout<<endl;
+                    print(arr,n);
+                    return 0;
+                    
+                }
+        
+    
