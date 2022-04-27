@@ -1,0 +1,73 @@
+#include <iostream>
+
+using namespace std;
+
+void print(int *a,int n){
+    for(int i=0;i<n;i++)
+    {
+        cout<<a[i]<<"  ";
+        
+    }
+    cout<<endl;
+}
+ 
+ //*******************partition********************************
+ 
+ int partition(int a[],int low, int high) {
+     
+     int i,j,pivot,temp=0;
+     pivot=a[low];
+     i=low+1;
+     j=high;
+     
+     do{
+         while(a[i]<=pivot)
+         {
+             i++;
+             
+         }
+         while(a[j]>pivot)
+         {
+             j--;
+         }
+         if(i<j)
+         {
+             temp=a[i];
+             a[i]=a[j];
+             a[j]=temp;
+             
+         }
+     }
+       while(i<j);
+     temp=a[low];
+     a[low]=a[j];
+     a[j]=temp;
+     return j;
+     
+     }
+     
+     
+     //************************************************************
+     
+     void quicksort(int a[],int low,int high)
+     {
+         int index;
+         if(low<high){
+             index=partition(a,low,high);
+             quicksort(a,low,index-1);
+             quicksort(a,index+1,high);
+             
+         }
+     }
+ 
+           int main()
+           {
+               int arr[] = {6,9,5,7,3,12,8,2};
+               int n=sizeof(arr)/sizeof(int);
+               print(arr,n);
+               quicksort(arr,0,n-1);
+               print(arr,n);
+               return 0;
+               
+           }
+    
