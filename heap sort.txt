@@ -1,0 +1,73 @@
+#include<iostream>
+using namespace std;
+
+void swap(int *x,int *y){
+    int temp;
+    temp = *x;
+    *x =*y;
+    *y = temp;
+}
+ void print(int A[],int n)
+ {
+     for(int i=0;i<n;i++)
+     {
+         cout<<A[i]<<" ";
+     }
+ }
+ 
+  //*******************************************************************
+  
+  void max_heap(int A[],int root,int size)
+  {
+      int left = 2* root;
+      int right = 2* root+1;
+      int high = root;
+      if(left<size && A[left]>A[high])
+      {
+          high=left;
+      }
+       if(right<size && A[right]>A[high])
+       {
+           high = right;
+       }
+        
+        if(root!=high)
+        {
+            swap(&A[high],&A[root]);
+            max_heap(A,high,size);
+            
+        }
+       }
+       //**********************************************************
+       void heap(int A[],int size){
+           
+           // for max heap***************************************
+           for(int root = (size/2)-1;root>=0; root--)
+           {
+               max_heap(A,root,size);
+               
+           }
+           for(int s=size-1; s>=0; s--)
+           {
+               swap(&A[0],&A[s]);
+               max_heap(A,0,s);
+               
+               
+           }
+       }
+       
+        //*******************************************************
+        
+        int main()
+        {
+            int arr[] = {12,25,35,17,13,8,46,6};
+            int size = sizeof(arr)/sizeof(int);
+            print(arr,size);
+            cout<<"\n";
+            heap(arr,size);
+            print(arr,size);
+            return 0;
+        }
+      
+  
+    
