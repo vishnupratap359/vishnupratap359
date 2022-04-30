@@ -1,0 +1,24 @@
+//********************no argument return value *****************************
+
+#include <stdio.h>
+int sum();
+
+void main()
+{
+    int result;
+    result=sum();
+    printf("%d",result);
+    
+   
+}
+
+int sum()
+{
+    int a,b,c;
+    printf("enter the two number:");
+    scanf("%d%d",&a,&b);
+    c=a+b;
+    
+    
+    return c;
+}

@@ -1,0 +1,16 @@
+//****************no return no argument function********************************
+#include <stdio.h>
+void sum();
+
+int main()
+{
+    sum();
+    return 0;
+}
+
+ void sum()
+ {
+     int a=5;
+     int b=10;
+     printf("%d",a+b);
+ }

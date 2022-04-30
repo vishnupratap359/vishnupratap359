@@ -1,0 +1,25 @@
+//*****************************funtion with argument and return value***************
+#include <stdio.h>
+int sum(int ,int );
+
+void main()
+{
+    int  result , x,y;
+     printf("enter the two number :");
+    scanf("%d%d",&x,&y);
+    result=sum(x,y);
+    printf("%d",result);
+    
+   
+}
+
+int sum(int x,int y)
+{
+
+   
+    
+    return x+y;
+    
+    
+
+}
