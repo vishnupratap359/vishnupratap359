@@ -1,0 +1,43 @@
+#include<iostream>
+using namespace std;
+template < class chetu, class chetu1 = int >class array
+{
+public:
+  chetu * arr;
+  int size;
+    array (int size)
+  {
+    arr = new chetu (size);
+
+  }
+  void get ()
+  {
+    chetu input;
+    cout << "enter the element";
+    for (int i = 0; i < size; i++)
+      {
+	cin >> input;
+	arr[i] = input;
+
+      }
+  }
+
+  void print ()
+  {
+    for (int i = 0; i < size; i++)
+      {
+	cout << arr[i] << " ";
+	cout << " ";
+
+      }
+  }
+};
+
+int
+main ()
+{
+  array < char >obj (3);
+  obj.get ();
+  obj.print ();
+  return 0;
+}
