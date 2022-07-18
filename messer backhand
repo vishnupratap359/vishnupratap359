@@ -1,0 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+
+public partial class Admin_Panel_messer : System.Web.UI.Page
+{
+    Master ob = new Master();
+    string Str, n, k, k1, k2; string sql;
+    int g;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void submit_Click(object sender, EventArgs e)
+    {
+        //try
+        //{
+
+        DateTime utctime = DateTime.UtcNow;
+        utctime = DateTime.UtcNow.AddHours(5);
+        utctime = utctime.AddMinutes(30);
+        ob.constr();
+
+        DateTime dt1 = Convert.ToDateTime(utctime);
+        string formatted = dt1.ToString("M/d/yyyy");
+        try
+        {
+            SqlDataAdapter da = new SqlDataAdapter("select Max(Sr_No) from contact", ob.con1);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            if (da.Fill(ds) > 0)
+            { Str = ds.Tables[0].Rows[0][0].ToString(); }
+            g = int.Parse(Str) + 1;
+            n = g.ToString();
+        }
+        catch (Exception)
+        {
+            g = 1; n = g.ToString();
+        }
+
+        //name,Title,CompanyTitle,email,RfC,Interest,subject,msg,CV,post_date
+        SqlCommand cmd = new SqlCommand("messer1", ob.con1);
+        cmd.CommandType = CommandType.StoredProcedure;
+
+        cmd.Parameters.Add(new SqlParameter("@CUSTOMER_ID", SqlDbType.NVarChar, 255)).Value = id.Text;
+        cmd.Parameters.Add(new SqlParameter("@CUSTOMER_ADDRESS", SqlDbType.NVarChar, 255)).Value = address.Text;
+        cmd.Parameters.Add(new SqlParameter("@COMPANY_NAME", SqlDbType.NVarChar, 255)).Value = company.Text;
+        cmd.Parameters.Add(new SqlParameter("@PERSON_NAME", SqlDbType.NVarChar, 255)).Value = person.Text;
+        cmd.Parameters.Add(new SqlParameter("@CUSTOMER_MOBILE_NO_1", SqlDbType.NVarChar, 500)).Value = mobile1.Text;
+        cmd.Parameters.Add(new SqlParameter("@MOBILE_NO_2", SqlDbType.NVarChar, 500)).Value = Mobile2.Text;
+        //cmd.Parameters.Add(new SqlParameter("@msg", SqlDbType.NVarChar, 500)).Value = Message.Text;
+        //cmd.Parameters.Add(new SqlParameter("@post_date", SqlDbType.NVarChar, 500)).Value = formatted;
+        //if (FileUpload1.HasFile)
+        //{
+        //    string zz = FileUpload1.FileName;
+        //    k1 = n + zz;
+        //    FileUpload1.SaveAs(Server.MapPath("~/Upload/" + k1.ToString()));
+
+        //    cmd.Parameters.Add(new SqlParameter("@CV", SqlDbType.NVarChar, -1)).Value = "~/upload/" + k1.ToString();
+        //    //cmd.Parameters.Add(new SqlParameter("@Img", SqlDbType.NVarChar, -1)).Value = k1.ToString();
+
+        //}
+
+        cmd.ExecuteNonQuery();
+        this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('DSR Details Submitted Successfully')", true);
+
+        ob.con1.Close();
+
+        id.Text = "";
+        address.Text = "";
+        company.Text = "";
+        person.Text = "";
+        mobile1.Text = "";
+        Mobile2.Text = "";
+       // Mobile2.Text = "";
+       // limit.Text = "";
+
+        //vm.Text = "";
+        //reading.Text = "";
+        //remarks.Text = "";
+
+        //}
+        //catch (Exception ex)
+        //{
+        //    ob.con1.Close();
+
+        //}
+
+
+    }
