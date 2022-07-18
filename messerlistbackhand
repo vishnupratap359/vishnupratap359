@@ -1,0 +1,88 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+
+public partial class Admin_Panel_messerlist : System.Web.UI.Page
+{
+    Master ob = new Master();
+    SqlDataAdapter da;
+    DataSet ds;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            BindData();
+        }
+    }
+    private void BindData()
+    {
+        DataSet table = new DataSet();
+        ob.constr();
+        string sql = @"select * from messer ";
+        SqlCommand cmd = new SqlCommand(sql, ob.con1);
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        da.Fill(table);
+        GridView1.DataSource = table;
+        GridView1.DataBind();
+        ob.con1.Close();
+    }
+    protected void OnRowCancelingEdit(object sender, EventArgs e)
+    {
+        GridView1.EditIndex = -1;
+        this.BindData();
+    }
+    protected void OnRowEditing(object sender, GridViewEditEventArgs e)
+    {
+        GridView1.EditIndex = e.NewEditIndex;
+        this.BindData();
+    }
+    protected void OnRowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        try
+        {
+            ob.constr();
+            GridViewRow row = GridView1.Rows[e.RowIndex];
+            int sr_no = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0]);
+            string name = (row.Cells[5].Controls[0] as TextBox).Text;
+            string phone = (row.Cells[6].Controls[0] as TextBox).Text;
+            //ob.Updaterec("Update regcust set P_Name='" + name + "',Mob='" + phone + "' where sr_no='" + sr_no + "'");
+            this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Customer Details Updated Successfully.')", true);
+            ob.con1.Close();
+        }
+        catch { Response.Redirect("~/SMLogin.aspx"); }
+        GridView1.EditIndex = -1;
+        this.BindData();
+    }
+    protected void OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+        ob.constr();
+        try
+        {
+            String index = (GridView1.SelectedRow.FindControl("srno") as Label).Text;
+            Session.Add("custid", index);
+            Response.Redirect("messerupdate.aspx");
+        }
+
+        catch
+        {
+
+        }
+        //ob.con1.Close();
+    }
+
+          protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        ob.constr();
+        int id3 = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0]);
+        ob.cmd1.CommandText = "delete from messer where CUSTOMER_ID='" + id3 + "'";
+        ob.delete1(ob.cmd1.CommandText);
+        Page.ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Role Deleted Successfully !!!')", true);
+        ob.con1.Close();
+        BindData();
+    }
+}
