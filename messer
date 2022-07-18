@@ -1,0 +1,113 @@
+%@ Page Title="" Language="C#" MasterPageFile="~/Admin Panel/home.master" AutoEventWireup="true" CodeFile="messer.aspx.cs" Inherits="Admin_Panel_messer" EnableEventValidation="false"%>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+        <div id="page-wrapper">
+            <div class="main-page">
+                <div class="forms">
+                    <%--	<h2 class="title1">Forms</h2>--%>
+                    <div class="form-grids row widget-shadow" data-example-id="basic-forms">
+                        <div class="form-title">
+                            <h4>Add Messer :</h4>
+                        </div>
+                        <div class="form-body">
+                            <form>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputID">ID</label>
+                                        <%--<input type="email" class="form-control" id="exampleInputID" placeholder="ID">--%>
+                                         <asp:RequiredFieldValidator ID="Rfv21" runat="server" ControlToValidate="id" ErrorMessage="*" ForeColor="Red" 
+                                         ToolTip="Please Enter To Id" ValidationGroup="abc"></asp:RequiredFieldValidator>
+                                         <asp:TextBox ID="id" runat="server" class="form-control" placeholder="id"></asp:TextBox>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputCompanyname"> Customer Address</label>
+                                        <%--<input type="email" class="form-control" id="exampleInputCompanyname" placeholder="Company name">--%>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="address" ErrorMessage="*" ForeColor="Red" 
+                                         ToolTip="Please Enter To Address" ValidationGroup="abc"></asp:RequiredFieldValidator>
+                                         <asp:TextBox ID="address" runat="server" class="form-control" placeholder="address"></asp:TextBox>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputAddress">Firm/Company Name</label>
+                                        <%--<input type="Address" class="form-control" id="exampleInputAddress" placeholder="address">--%>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="company" ErrorMessage="*" ForeColor="Red" 
+                                         ToolTip="Please Enter To Company" ValidationGroup="abc"></asp:RequiredFieldValidator>
+                                         <asp:TextBox ID="company" runat="server" class="form-control" placeholder="company"></asp:TextBox>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputPersonName">Person Name</label>
+                                       <%-- <input type="PersonName" class="form-control" id="exampleInputPersonName" placeholder="Person Name">--%>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="person" ErrorMessage="*" ForeColor="Red" 
+                                         ToolTip="Please Enter To Person" ValidationGroup="abc"></asp:RequiredFieldValidator>
+                                        <asp:TextBox ID="person" runat="server" class="form-control" placeholder="person name"></asp:TextBox>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputMobileno.1">Mobile No.1</label>
+                                       <%-- <input type="Mobileno.1" class="form-control" id="exampleInputMoblieno.1" placeholder="Mobile No">--%>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="mobile1" ErrorMessage="*" ForeColor="Red" 
+                                         ToolTip="Please Enter To Mobile1" ValidationGroup="abc"></asp:RequiredFieldValidator>
+                                        <asp:TextBox ID="mobile1" runat="server" class="form-control" placeholder="mobile no" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Please Enter Valid Number.')" pattern="[0-9]{10}"  MaxLength="10"></asp:TextBox>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputMobileno.2">mobile No.2</label>
+                                        <%--<input type="Mobileno.2" class="form-control" id="exampleInputMobileno.2" placeholder="Mobile No">--%>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="mobile2" ErrorMessage="*" ForeColor="Red" 
+                                         ToolTip="Please Enter To Mobile2" ValidationGroup="abc"></asp:RequiredFieldValidator>
+                                        <asp:TextBox ID="Mobile2" runat="server" class="form-control" placeholder="mobile no2" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Please Enter Valid Number.')" pattern="[0-9]{10}"  MaxLength="10"></asp:TextBox>
+                                    </div>
+                                </div>
+
+                             
+
+<%--                                <div class="form-group">
+                                    <label for="exampleInputFile">File input</label>
+                                    <input type="file" id="exampleInputFile">
+                                    <p class="help-block">Example block-level help text here.</p>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox">
+                                        Check me out </label>
+                                </div>--%>
+
+                                 <div class="col-md-12">
+                                    <div class="form-group">
+                               <%-- <button type="Submit" class="btn btn-default" style="float:right;margin-top:50px">Submit</button>--%>
+                                       <asp:Button ID="submit" Class="btn btn-default" runat="server" Text="submit" Style="right;margin-top:20px;background-color:midnightblue;color:white;float:right;margin-bottom:5px" OnClick="submit_Click"/>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+</asp:Content>
+
+
+      
+
+
