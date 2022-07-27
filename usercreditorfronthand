@@ -1,0 +1,236 @@
+%@ Page Title="" Language="C#" MasterPageFile="~/user/user.master" AutoEventWireup="true" CodeFile="creditor.aspx.cs" Inherits="user_creditor" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div id="page-wrapper">
+        <div class="main-page">
+            <div class="forms">
+                <%--	<h2 class="title1">Forms</h2>--%>
+
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="form-grids row widget-shadow" data-example-id="basic-forms">
+                            <div class="form-title">
+                                <h4>Creditor(messer):</h4>
+                            </div>
+                            <div class="form-body">
+                               <%-- <form>--%>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputFirm/Company">Date</label>
+                                                <%-- <input type=" Firm/Company" class="form-control" id="exampleInputCompmay" placeholder="Firm/Company">--%>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="date" ErrorMessage="*" ForeColor="Red"
+                                                    ToolTip="Please Enter To company name" ValidationGroup="abc"></asp:RequiredFieldValidator>
+                                                <asp:TextBox ID="date" CssClass="form-control" runat="server" placeholder="Date" Type="date"> </asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputFirm/Company">I'd</label>
+                                                <%-- <input type=" Firm/Company" class="form-control" id="exampleInputCompmay" placeholder="Firm/Company">--%>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="Id3" ErrorMessage="*" ForeColor="Red"
+                                                    ToolTip="Please Enter To company name" ValidationGroup="abc"></asp:RequiredFieldValidator>
+                                                <asp:TextBox ID="Id3" CssClass="form-control" runat="server" ReadOnly="true" placeholder="I'd"> </asp:TextBox>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputFirm/Company">Messer's Name</label>
+                                                <%-- <input type=" Firm/Company" class="form-control" id="exampleInputCompmay" placeholder="Firm/Company">--%>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="messername" ErrorMessage="*" ForeColor="Red"
+                                                    ToolTip="Please Enter To company name" ValidationGroup="abc"></asp:RequiredFieldValidator>
+                                                <asp:TextBox ID="messername" CssClass="form-control" runat="server" ReadOnly="true" placeholder="messername"> </asp:TextBox>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputPayment Recieved">Person Name </label>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="persons" ErrorMessage="*" ForeColor="Red"
+                                                    ToolTip="Please Enter To payment Received" ValidationGroup="abc"></asp:RequiredFieldValidator>
+                                                <asp:TextBox ID="persons" CssClass="form-control" runat="server" ReadOnly="true" placeholder="persons"> </asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputPayment Recieved">Mobile No.</label>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="mobile" ErrorMessage="*" ForeColor="Red"
+                                                    ToolTip="Please Enter To payment Received" ValidationGroup="abc"></asp:RequiredFieldValidator>
+                                                <asp:TextBox ID="mobile" CssClass="form-control" runat="server" ReadOnly="true" placeholder="mobile No."> </asp:TextBox>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputRemark">Last Balance</label>
+                                                <%-- <input type="Remark" class="form-control" id="exampleInputRemark" placeholder="Remark">--%>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="lstbalance" ErrorMessage="*" ForeColor="Red"
+                                                    ToolTip="Please Enter To remarks" ValidationGroup="abc"></asp:RequiredFieldValidator>
+                                                <asp:TextBox ID="lstbalance" CssClass="form-control" runat="server" placeholder="Last Balance" ReadOnly="true" Text="0"> </asp:TextBox>
+                                            </div>
+                                        </div>
+
+                    
+                                             <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputPayment Recieved">Purchase Amount </label>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="pamount" ErrorMessage="*" ForeColor="Red"
+                                                    ToolTip="Please Enter To payment Received" ValidationGroup="abc"></asp:RequiredFieldValidator>
+                                                <asp:TextBox ID="pamount" CssClass="form-control" runat="server" placeholder="Purchase Amount" AutoPostBack="true" OnTextChanged="pamount_TextChanged"> </asp:TextBox>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputPayment Recieved">Total Amount</label>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="tamount" ErrorMessage="*" ForeColor="Red"
+                                                    ToolTip="Please Enter To payment Received" ValidationGroup="abc"></asp:RequiredFieldValidator>
+                                                <asp:TextBox ID="tamount" CssClass="form-control" runat="server" placeholder="Total Amount" ReadOnly="true"> </asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputPayment Recieved">Paid Amount</label>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="Pdamount" ErrorMessage="*" ForeColor="Red"
+                                                    ToolTip="Please Enter To payment Received" ValidationGroup="abc"></asp:RequiredFieldValidator>
+                                                <asp:TextBox ID="Pdamount" CssClass="form-control" runat="server" placeholder="Paid Amount" AutoPostBack="true" OnTextChanged="Pdamount_TextChanged"> </asp:TextBox>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputPayment Recieved">Total Due</label>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="totaldue" ErrorMessage="*" ForeColor="Red"
+                                                    ToolTip="Please Enter To payment Received" ValidationGroup="abc"></asp:RequiredFieldValidator>
+                                                <asp:TextBox ID="totaldue" CssClass="form-control" runat="server" placeholder="Total Due" ReadOnly="true"> </asp:TextBox>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputPayment Recieved">Remarks</label>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="remark" ErrorMessage="*" ForeColor="Red"
+                                                    ToolTip="Please Enter To payment Received" ValidationGroup="abc"></asp:RequiredFieldValidator>
+                                                <asp:TextBox ID="remark" CssClass="form-control" runat="server" placeholder="Remarks"> </asp:TextBox>
+                                            </div>
+                                        </div>
+
+
+                                        <%--<div class="col-md-8">--%>
+                                        <div class="form-group">
+                                            <%-- <button type="Submit" class="btn btn-default" style="float: right; margin-top: 30px">Submit</button>--%>
+
+                                            <asp:Button ID="Submit" runat="server" Text="Submit" Style="right; margin-top: 20px" class="btn btn-default" ValidationGroup="abc" OnClick="Submit_Click" />
+                                        </div>
+                                    </div>
+                               <%-- </form>--%>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-grids row widget-shadow" data-example-id="basic-forms">
+                            <div class="form-title">
+                               
+                               <%-- <h4>Report</h4>--%>
+                            </div>
+                            <div class="form-body">
+                               <%-- <form>--%>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="form-group">
+                                                <label for="exampleInputFirm/Company">Id/firm Name</label>
+                                                <%-- <input type=" Firm/Company" class="form-control" id="exampleInputCompmay" placeholder="Firm/Company">--%>
+                                                <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="date" ErrorMessage="*" ForeColor="Red"
+                                                    ToolTip="Please Enter To company name" ValidationGroup="abc"></asp:RequiredFieldValidator>--%>
+                                                <asp:TextBox ID="firmname" CssClass="form-control" runat="server" placeholder="Id/firm Name" > </asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2" style="margin-top:20px;">
+                                            <div class="form-group">
+                                               
+                                                <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Admin Panel/images/search.png"  OnClick="ImageButton1_Click"/>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-12">
+                                             <div class="table-responsive">
+<div align="center" style="overflow-x: scroll; overflow-y: scroll; height:250px">
+     <asp:Panel ID="print_panel" runat="server" Width="100%">
+<table class="align-middle mb-0 table table-borderless table-striped table-hover">
+    <asp:GridView ID="grd1" runat="server" AutoGenerateColumns="false" GridLines="Vertical" 
+     HeaderStyle-BackColor="#339933" DataKeyNames="CUSTOMER_ID" 
+         Width="100%"  ForeColor="Black" BackColor="Silver"  OnSelectedIndexChanged="OnSelectedIndexChanged" Font-Size="12px" BorderColor="White">
+      <Columns>
+          <%-- <asp:TemplateField>
+  <HeaderTemplate>
+  <asp:CheckBox ID="chkboxSelectAll" runat="server" AutoPostBack="true" OnCheckedChanged="chkboxSelectAll_CheckedChanged" />
+  </HeaderTemplate>
+ <ItemTemplate><asp:CheckBox ID="chk" runat="server" /></ItemTemplate>
+ </asp:TemplateField>--%>
+      <asp:TemplateField Visible="false">
+       <ItemTemplate>
+       <asp:Label ID="sn" runat="server" Text='<%# Bind("CUSTOMER_ID") %>'></asp:Label>
+       </ItemTemplate>
+       </asp:TemplateField>
+  
+   <asp:TemplateField>
+   <HeaderTemplate>
+   S/N</HeaderTemplate>
+   <ItemTemplate>
+   <asp:Label ID="lblSRNO" runat="server" 
+       Text='<%#Container.DataItemIndex+1 %>'></asp:Label>
+   </ItemTemplate>
+   </asp:TemplateField>
+          <asp:ButtonField CommandName="Select" HeaderText="View" ControlStyle-CssClass="fa fa-reply-all" />
+<%--<asp:ButtonField CommandName="Select" HeaderText="Edit" ButtonType="Link" ControlStyle-CssClass="fa fa-edit"/>--%>
+   <%-- <asp:TemplateField HeaderText="Enr_No." ItemStyle-Width="50px">
+    <ItemTemplate><asp:Label ID="AdmNo" runat="server" Text='<%# Bind("AdmNo") %>'></asp:Label></ItemTemplate>
+    </asp:TemplateField>--%>
+   <asp:BoundField DataField="CUSTOMER_ID" HeaderText="Id"><controlstyle Width="100px"></controlstyle></asp:BoundField>
+   <asp:BoundField DataField="COMPANY_NAME" HeaderText="messername"><controlstyle Width="100px"></controlstyle></asp:BoundField>
+     <asp:BoundField DataField="CUSTOMER_MOBILE_NO_1" HeaderText="mobile"><controlstyle Width="100px"></controlstyle></asp:BoundField>
+   <asp:BoundField DataField="PERSON_NAME" HeaderText="persons"><controlstyle Width="400px"></controlstyle></asp:BoundField>
+ <%--  <asp:BoundField DataField="PostDt" HeaderText="Date" ItemStyle-Width="200px"/>--%>
+   </Columns>
+   <HeaderStyle BackColor="#76B5E3" ForeColor="White" Height="20px"></HeaderStyle>
+   <RowStyle BackColor="#F4F4F4" ForeColor="Black" />
+   <AlternatingRowStyle BackColor="#C4DFF2" ForeColor="Black" />         
+   <SelectedRowStyle BackColor="#CC99FF" />
+   
+       </asp:GridView>
+</table>
+         </asp:Panel>
+ </div>
+ </div>
+
+                                        </div>
+                                        </div>
+                                        
+                               <%-- </form>--%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--</div>--%>
+
+
+    <div style="margin-top: 270px" class="footer">
+        <p>&copy; 2022 Fab Fernico. All Rights Reserved | Developed by <a href="http://torrentinfotech.com/" target="_blank">Torrent Infotech</a></p>
+    </div>
+
+</asp:Content>
