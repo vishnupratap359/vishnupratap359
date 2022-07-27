@@ -1,0 +1,134 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+
+
+public partial class user_Debitor_s : System.Web.UI.Page
+{
+    Master ob = new Master();
+    string Str, n, k, k1, k2; string sql;
+    int g;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void Submit_Click(object sender, EventArgs e)
+    {
+
+        DateTime utctime = DateTime.UtcNow;
+        utctime = DateTime.UtcNow.AddHours(5);
+        utctime = utctime.AddMinutes(30);
+        ob.constr();
+
+        DateTime dt1 = Convert.ToDateTime(utctime);
+        string formatted = dt1.ToString("M/d/yyyy");
+
+        //name,Title,CompanyTitle,email,RfC,Interest,subject,msg,CV,post_date
+        SqlCommand cmd = new SqlCommand("debitors", ob.con1);
+        cmd.CommandType = CommandType.StoredProcedure;
+
+        cmd.Parameters.Add(new SqlParameter("@Date", SqlDbType.NVarChar, 255)).Value = date.Text;
+        cmd.Parameters.Add(new SqlParameter("@ID", SqlDbType.NVarChar, 255)).Value = Id31.Text;
+        cmd.Parameters.Add(new SqlParameter("@Messer_Name", SqlDbType.NVarChar, 255)).Value = messername.Text;
+        cmd.Parameters.Add(new SqlParameter("@Person_Name", SqlDbType.NVarChar, 255)).Value = persons.Text;
+        cmd.Parameters.Add(new SqlParameter("@Mobile_No", SqlDbType.NVarChar, 500)).Value = mobile.Text;
+        cmd.Parameters.Add(new SqlParameter("@Last_Balance", SqlDbType.NVarChar, 500)).Value = lstbalance.Text;
+        cmd.Parameters.Add(new SqlParameter("@Purchase_Amount", SqlDbType.NVarChar, 500)).Value = pamount.Text;
+        cmd.Parameters.Add(new SqlParameter("@Total_Amount", SqlDbType.NVarChar, 500)).Value = tamount.Text;
+        cmd.Parameters.Add(new SqlParameter("@Paid_Amount", SqlDbType.NVarChar, 500)).Value = Pdamount.Text;
+        cmd.Parameters.Add(new SqlParameter("@Total_Due", SqlDbType.NVarChar, 500)).Value = totaldue.Text;
+        cmd.Parameters.Add(new SqlParameter("@remark", SqlDbType.NVarChar, 500)).Value = remark.Text;
+        //if (FileUpload1.HasFile)
+        //{
+        //    string zz = FileUpload1.FileName;
+        //    k1 = n + zz;
+        //    FileUpload1.SaveAs(Server.MapPath("~/Upload/" + k1.ToString()));
+
+        //    cmd.Parameters.Add(new SqlParameter("@CV", SqlDbType.NVarChar, -1)).Value = "~/upload/" + k1.ToString();
+        //    //cmd.Parameters.Add(new SqlParameter("@Img", SqlDbType.NVarChar, -1)).Value = k1.ToString();
+
+        //}
+
+        cmd.ExecuteNonQuery();
+        this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Creditor Details Submitted Successfully')", true);
+
+        ob.con1.Close();
+        date.Text = "";
+        Id31.Text = "";
+        messername.Text = "";
+        persons.Text = "";
+        mobile.Text = "";
+        lstbalance.Text = "";
+        pamount.Text = "";
+        tamount.Text = "";
+        Pdamount.Text = "";
+        totaldue.Text = "";
+        remark.Text = "";
+        //}
+        //catch (Exception ex)
+        //{
+        //    ob.con1.Close();
+
+        //}
+
+    }
+
+
+    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+    {
+        DataSet table = new DataSet();
+        ob.constr();
+        string sql = @"select * from add_party where c_name like '" + idfirmname.Text + "%'  or ID='" + idfirmname.Text + "' ";
+        SqlCommand cmd = new SqlCommand(sql, ob.con1);
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        da.Fill(table);
+        grd1.DataSource = table;
+        grd1.DataBind();
+        ob.con1.Close();
+    }
+
+    protected void OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+        ob.constr();
+        string Id1 = (grd1.SelectedRow.FindControl("sn") as Label).Text;
+        String str1 = "select * from add_party where ID='" + Id1 + "'";
+        SqlCommand cmd1 = new SqlCommand(str1, ob.con1);
+        SqlDataReader dr1 = cmd1.ExecuteReader();
+        dr1.Read();
+        Id31.Text = dr1["ID"].ToString();
+        messername.Text = dr1["c_name"].ToString();
+        mobile.Text = dr1["mobile_no1"].ToString();
+        persons.Text = dr1["Per_name"].ToString();
+        //  lstbalance.Text = dr1["Last_Balance"].ToString();
+        //limit.Text = dr1["Limit_amount"].ToString();
+
+        dr1.Close();
+        if (ob.searchrec("select id from debitor where id='" + Id1 + "'"))
+        {
+            String str12 = "select Last_Balance from debitor where ID='" + Id1 + "' order by sr_no desc ";
+            SqlCommand cmd21 = new SqlCommand(str12, ob.con1);
+            SqlDataReader dr12 = cmd21.ExecuteReader();
+            dr12.Read();
+            lstbalance.Text = dr12["Last_Balance"].ToString();
+            dr12.Close();
+        }
+
+        ob.con1.Close();
+    }
+
+    protected void pamount_TextChanged(object sender, EventArgs e)
+    {
+        tamount.Text = Convert.ToString(Convert.ToDouble(pamount.Text) + Convert.ToDouble(lstbalance.Text));
+    }
+
+    protected void Pdamount_TextChanged(object sender, EventArgs e)
+    {
+        totaldue.Text = Convert.ToString(Convert.ToDouble(tamount.Text) - Convert.ToDouble(Pdamount.Text));
+    }
+}
