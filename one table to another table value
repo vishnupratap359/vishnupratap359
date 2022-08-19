@@ -1,0 +1,136 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+
+public partial class service : System.Web.UI.Page
+{
+    Master ob = new Master();
+    //obj.construct();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        
+        if (!IsPostBack)
+        {
+            Service();
+            getMessageAddress();
+        }
+    }
+
+    protected void Submit_Click(object sender, EventArgs e)
+    {
+        //try
+        //{
+            ob.constr();
+
+            SqlCommand cmd = new SqlCommand("spInsertService", ob.con1);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@Category", scategory.Text);
+            cmd.Parameters.AddWithValue("@Service", sservice.Text);
+            cmd.Parameters.AddWithValue("@Charge", servicecharge.Text);
+            cmd.Parameters.AddWithValue("@Description", description.Text);
+            cmd.Parameters.AddWithValue("@Message", message.Text);
+            cmd.Parameters.AddWithValue("@Date", date.Text);
+            cmd.Parameters.AddWithValue("@Time", time.Text);
+
+
+
+            cmd.ExecuteNonQuery();
+
+            this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Requested Send Successfully...')", true);
+
+          //  scategory.Text = "";
+          //  sservice.Text = "";
+           // servicecharge.Text = "";
+            description.Text = "";
+            message.Text = "";
+            date.Text = "";
+            time.Text = "";
+
+            ob.con1.Close();
+
+        //}
+
+       // catch { Response.Redirect("~/index.aspx"); }
+        
+    }
+
+    public void Service()
+    {
+        ob.constr();
+
+        SqlDataAdapter da = new SqlDataAdapter("select Distinct S_Category from Service_Cat order by S_Category", ob.con1);
+        DataSet ds = new DataSet();
+        scategory.Items.Clear();
+        scategory.Items.Add("Select Category Type");
+        if (da.Fill(ds) > 0)
+        {
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                scategory.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+            }
+        }
+
+
+        ob.con1.Close();
+    }
+
+    protected void scategory_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        ob.constr();
+
+        SqlDataAdapter da = new SqlDataAdapter("select Distinct Define_Service from Service_Master where Select_Category='"+ scategory.Text+"'", ob.con1);
+            DataSet ds = new DataSet();
+        sservice.Items.Clear();
+            //category.Items.Add("Select Service");
+            if (da.Fill(ds) > 0)
+            {
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                sservice.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+                }
+            }
+        ob.con1.Close();
+    }
+
+    protected void sservice_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        ob.constr();
+
+       SqlCommand cmd = new SqlCommand("select Define_Charge from Service_Master where Define_Service='" + sservice.Text + "'", ob.con1);
+        SqlDataReader dr1 = cmd.ExecuteReader();
+        dr1.Read();
+        servicecharge.Text = dr1["Define_Charge"].ToString();
+        ob.con1.Close();
+    }
+
+   protected void getMessageAddress()
+    {
+        try
+        {
+
+            ob.constr();
+            String Phone = Session["Phone"].ToString().Trim();
+            string str1 = "select * from Users where phone='" + Phone + "' ";
+            SqlCommand cmd1 = new SqlCommand(str1, ob.con1);
+            SqlDataReader dr1 = cmd1.ExecuteReader();
+            dr1.Read();
+            message.Text = dr1["FAddress"].ToString();
+            
+            dr1.Close();
+
+
+        }
+        catch
+        {
+            //this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Something went wrong. Please check it.')", true);
+        }
+        ob.con1.Close();
+    }
+}
+
