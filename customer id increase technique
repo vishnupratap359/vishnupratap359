@@ -1,0 +1,27 @@
+ public void CustomerId()
+    {
+        ob.constr();
+        string sqlText = "SELECT MAX(id) FROM Add_Party ";
+        SqlCommand command = new SqlCommand(sqlText, ob.con1);
+        try
+        {
+
+            string pcount = Convert.ToString(command.ExecuteScalar());
+            if (pcount.Length == 0)
+            {
+                id.Text = "101";
+            }
+            else
+            {
+                int pcount1 = Convert.ToInt32(pcount);
+                int pcountAdd = pcount1 + 1;
+                id.Text = pcountAdd.ToString();
+
+            }
+          
+        }
+        catch (Exception)
+        {
+        }
+        ob.con1.Close();
+    }
