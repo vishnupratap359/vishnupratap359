@@ -1,0 +1,105 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+
+public partial class User_registrationReport : System.Web.UI.Page
+{
+    Master ob = new Master();
+    Boolean bl;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        BindData();
+    }
+
+    private void BindData()
+    {
+        ob.constr();
+        try
+        {
+            DataTable table = new DataTable();
+            string sql = "select * from Users";
+            SqlCommand cmd = new SqlCommand(sql, ob.con1);
+            SqlDataAdapter ad = new SqlDataAdapter(cmd);
+            ad.Fill(table);
+            GridView1.DataSource = table;
+            GridView1.DataBind();
+
+        }
+        catch(Exception ex) {
+           
+        }
+        ob.con1.Close();
+    }
+    protected void chkboxSelectAll_CheckedChanged(object sender, EventArgs e)
+    {
+        CheckBox ChkBoxHeader = (CheckBox)GridView1.HeaderRow.FindControl("chkboxSelectAll");
+        foreach (GridViewRow row in GridView1.Rows)
+        {
+            CheckBox ChkBoxRows = (CheckBox)row.FindControl("chk");
+            if (ChkBoxHeader.Checked == true)
+            {
+                ChkBoxRows.Checked = true;
+            }
+
+            if (ChkBoxHeader.Checked == false)
+            {
+                ChkBoxRows.Checked = false;
+            }
+        }
+    }
+
+    protected void delete_Click(object sender, ImageClickEventArgs e)
+    {
+        Page.ClientScript.RegisterStartupScript(GetType(), "alert", "alert('update karne ka function chlne jaa raha hai....')", true);
+
+        try
+        {
+            ob.constr();
+            string confirmValue = Request.Form["confirm_value"];
+            if (confirmValue == "Yes")
+            {
+                for (int i = 0; i < (GridView1.Rows.Count); i++)
+                {
+                    bl = ((CheckBox)((TableCell)GridView1.Rows[i].Cells[0]).FindControl("chk")).Checked;
+                    if (bl == true)
+                    {
+                        Label Lbl1 = (Label)GridView1.Rows[i].FindControl("id");
+                        ob.cmd1.CommandText = "update users set status='" + status.Text + "' where id='" + Lbl1.Text + "'";
+
+                        ob.delete1(ob.cmd1.CommandText);
+                        Page.ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Status Update Successfully !!!')", true);
+                        ob.con1.Close();
+                        BindData();
+                    }
+                    if (bl == false)
+                    {
+                        //this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Please Select Check Box!')", true);
+                    }
+                }
+                CheckBox ChkBoxHeader = (CheckBox)GridView1.HeaderRow.FindControl("chkboxSelectAll");
+                foreach (GridViewRow row in GridView1.Rows)
+                {
+                    CheckBox ChkBoxRows = (CheckBox)row.FindControl("chk");
+                    ChkBoxRows.Checked = false;
+                    ChkBoxHeader.Checked = false;
+                }
+            }
+            else
+            {
+                //this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Message has been not .')", true);
+            }
+            ob.con1.Close();
+        }
+        catch (Exception ex)
+        {
+            Response.Redirect("~/index.aspx");
+        }
+
+    }
+
+}
