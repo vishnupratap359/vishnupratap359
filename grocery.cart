@@ -1,0 +1,45 @@
+ <%@ Page Title="" Language="C#" MasterPageFile="VillaCityUser.master" AutoEventWireup="true" CodeFile="grocery.aspx.cs" Inherits="grocery" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style>
+        .card-footer {
+            padding: 0.1rem 0.5rem;
+            font-size: 1rem;
+            background-color: rgba(0,0,0,.03);
+            border-top: 1px solid rgba(0,0,0,.125);
+            }
+
+        .cover{
+            margin-bottom:63px;
+        }
+         body {
+             background-color: rgba(0,0,0,.03);
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server"> 
+   <div class="cover">
+        <asp:DataList CssClass="container-fluid" ID="DtlEvents" runat="server" RepeatColumns="2" OnSelectedIndexChanged="DtlEvents_SelectedIndexChanged">
+                        <ItemTemplate>
+                            <div class="dtDatalist">
+
+          <div class="card border-secondary m-2">
+              <asp:Image runat="server" CssClass="card-img-top mx-auto" ImageUrl="https://img.freepik.com/free-vector/realistic-fruits-composition-with-images-whole-sliced-apple-fruit-blank-background-vector-illustration_1284-66032.jpg?w=740&t=st=1661257678~exp=1661258278~hmac=93fa7bb0eef8b961d6c18c32717b6f1c239fcf66c4eb506a5435bf84581ac555" />
+            <div class="card-body">
+              <h6 class="card-title"><asp:Label ID="pName" runat="server" Text='<%# Bind("Remark") %>'></asp:Label></h6>
+              <p class="card-text"><asp:Label ID="Label1" runat="server" Text='<%# Bind("S_Rate") %>'></asp:Label></p>
+            </div>
+              <div class="card-footer">
+                  <div class="row">
+                      <div class="col-8">Price: <asp:Label ID="Label2" runat="server" Text='<%# Bind("P_Rate") %>'></asp:Label></div>
+                        <div class="col"><asp:Label ID="Label3" Visible="false" runat="server" Text='<%# Bind("Id") %>'></asp:Label><asp:ImageButton runat="server" id="AddToCart" ImageUrl="~/customer/images/add-to-cart.png" CommandName="Select"/></div>
+                  </div>
+             </div>
+          </div>
+        </div>
+        </ItemTemplate>
+        </asp:DataList>
+   </div>
+   
+   </asp:Content>
+   
