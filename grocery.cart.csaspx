@@ -1,0 +1,202 @@
+sing System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+
+public partial class grocery : System.Web.UI.Page
+{
+    Master ob = new Master();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            //Service();
+            BindData();
+        }
+    }
+
+
+    private void BindData()
+    {
+        try
+        {
+            ob.constr();
+            DataTable table = new DataTable();
+            String sql = "Select * from Gro_Master";
+            SqlCommand cmd = new SqlCommand(sql, ob.con1);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(table);
+            
+            DtlEvents.DataSource = table;
+            DtlEvents.DataBind();
+
+        }
+        catch (Exception ex)
+        {
+           
+        }
+        ob.con1.Close();
+    }
+
+
+    //protected void Submit_Click(object sender, EventArgs e)
+    //{
+
+    //    try
+    //    {
+    //        ob.constr();
+
+    //        SqlCommand cmd = new SqlCommand("Insert_Grocery", ob.con1);
+    //        cmd.CommandType = CommandType.StoredProcedure;
+
+    //        cmd.Parameters.AddWithValue("@Select_G_Category", scategory.Text);
+    //        cmd.Parameters.AddWithValue("@Define_Grocery", sgrocery.Text);
+    //        cmd.Parameters.AddWithValue("@P_Rate", grocerycharge.Text);
+    //        cmd.Parameters.AddWithValue("@S_Rate", srate.Text);
+    //        cmd.Parameters.AddWithValue("@Offer_Rate", offerrate.Text);
+    //        cmd.Parameters.AddWithValue("@Description", description.Text);
+    //        cmd.Parameters.AddWithValue("@Message", message.Text);
+    //        cmd.Parameters.AddWithValue("@Date", date.Text);
+    //        cmd.Parameters.AddWithValue("@Time", time.Text);
+
+
+
+    //        cmd.ExecuteNonQuery();
+
+    //        this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Requested Sent Successfully...')", true);
+
+    //        //  scategory.Text = "";
+    //        //  sgrocery.Text = "";
+    //        // grocerycharge.Text = "";
+    //        srate.Text = "";
+    //        offerrate.Text = "";
+    //        description.Text = "";
+    //        message.Text = "";
+    //        date.Text = "";
+    //        time.Text = "";
+
+    //        ob.con1.Close();
+
+    //    }
+
+    //    catch { Response.Redirect("~/index.aspx"); }
+    //}
+
+
+
+    //public void Service()
+    //{
+    //    try
+    //    {
+    //        ob.constr();
+
+    //        SqlDataAdapter da = new SqlDataAdapter("select Distinct G_Category from Gro_Cat order by G_Category", ob.con1);
+    //        DataSet ds = new DataSet();
+    //        scategory.Items.Clear();
+    //        scategory.Items.Add("Select Category Type");
+    //        if (da.Fill(ds) > 0)
+    //        {
+    //            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+    //            {
+    //                scategory.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+    //            }
+    //        }
+
+
+    //        ob.con1.Close();
+    //    }
+    //    catch { Response.Redirect("~/index.aspx"); }
+    //}
+
+
+    //protected void scategory_SelectedIndexChanged(object sender, EventArgs e)
+    //{
+    //    try
+    //    {
+    //        ob.constr();
+
+    //        SqlDataAdapter da = new SqlDataAdapter("select Distinct Define_Grocery from Gro_Master where Select_G_Category='" + scategory.Text + "'", ob.con1);
+    //        DataSet ds = new DataSet();
+    //        sgrocery.Items.Clear();
+    //        //sgrocery.Items.Add("Select Category Type");
+    //        if (da.Fill(ds) > 0)
+    //        {
+    //            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+    //            {
+    //                sgrocery.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+    //            }
+    //        }
+
+
+    //        ob.con1.Close();
+    //    }
+    //    catch { Response.Redirect("~/index.aspx"); }
+    //}
+
+    //protected void sgrocery_SelectedIndexChanged(object sender, EventArgs e)
+    //{
+    //    try
+    //    {
+    //        DataSet ds = new DataSet();
+    //        ob.constr();
+
+    //        string str2 = "select Distinct P_Rate,S_rate,Offer_Rate from Gro_Master where Select_G_Category='" + scategory.Text + "' and Define_Grocery='" + sgrocery.Text + "'";
+    //        //and S_Rate='" + scategory.Text + "'"; 
+    //        // and S_Rate='"+ srate.Text + "' ";
+    //        SqlCommand scmd = new SqlCommand(str2, ob.con1);
+    //        SqlDataReader dr1 = scmd.ExecuteReader();
+    //        dr1.Read();
+    //        grocerycharge.Text = dr1["P_Rate"].ToString();
+    //        srate.Text = dr1["S_Rate"].ToString();
+    //        offerrate.Text = dr1["Offer_Rate"].ToString();
+    //        dr1.Close();
+
+
+    //        ob.con1.Close();
+    //    }
+    //    catch { Response.Redirect("~/index.aspx"); }
+    //}
+
+
+    protected void DtlEvents_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        BindData();
+        Label img = (Label)DtlEvents.SelectedItem.FindControl("Label3");
+        int index = int.Parse(img.Text);
+        ob.constr();
+        string str1 = "Select * from Gro_Master where Id=" + index + "";
+        SqlCommand cmd1 = new SqlCommand(str1, ob.con1);
+        SqlDataReader dr1 = cmd1.ExecuteReader();
+        dr1.Read();
+
+        //AssDesc.Text = dr1["Content"].ToString();
+        //ViewState["Tid"] = dr1["Tid"].ToString();
+        //ViewState["Asid"] = dr1["AssignId"].ToString();
+        //ViewState["StuSubject"] = dr1["StuSubject"].ToString();
+        //ViewState["StuClass"] = dr1["StuClass"].ToString();
+        //ViewState["StuSec"] = dr1["Section"].ToString();
+
+        String pName = dr1["Define_Grocery"].ToString();
+        String pQuantity = dr1["Define_Grocery"].ToString();
+        String pPrice = dr1["P_Rate"].ToString();
+        String uMobile = Session["Phone"].ToString();
+        dr1.Close();
+
+
+        SqlCommand cmd = new SqlCommand("spInsertCart", ob.con1);
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.AddWithValue("productName", pName);
+        cmd.Parameters.AddWithValue("productQuantity", pQuantity);
+        cmd.Parameters.AddWithValue("productPrice", pPrice);
+        cmd.Parameters.AddWithValue("userMobile", uMobile);
+
+        cmd.ExecuteNonQuery();
+        
+        ob.con1.Close();
+    }
+
+}
