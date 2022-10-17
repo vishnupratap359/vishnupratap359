@@ -1,0 +1,126 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Security.master" AutoEventWireup="true" CodeFile="Reg.aspx.cs" Inherits="Reg" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+  
+
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
+    <%-- <div class="section-title" style=" margin-top:20px;margin-bottom:10px;background-color:#aa7f4c;">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2 class="text-uppercase">Sign Up Here</h2>
+            </div>
+        </div>
+    </div>--%>
+
+      <section class="welcome_section text-center layout_padding">
+      
+          
+				<div class="container" style="box-shadow:0px 2px 15px;position:relative;padding:30px;border-radius:10px;">
+                    <div class="row">
+                        <div class="col-md-12">
+                          <div><h3 class="text-uppercase">Sign Up Here</h3></div>
+                            </div>
+
+                        <div class="col-md-4">
+					<asp:TextBox ID="name" runat="server" class='form-control'  placeholder="Enter your name"></asp:TextBox>
+                    <asp:RequiredFieldValidator ToolTip="*" ID="RequiredFieldValidator1" ValidationGroup="j" runat="server" ControlToValidate="name" ErrorMessage="*" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+				</div> 
+                   <br />
+                
+                    
+                  <div class="col-md-4">
+
+                       <asp:textBox ID="fname" runat="server" CssClass='form-control' placeholder="Please enter your Fathername">
+                           
+                         </asp:textBox>
+                       <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="j" runat="server" ControlToValidate="fname" ErrorMessage="*" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>			
+             </div>
+             
+                <div class="col-md-4">
+                     <asp:TextBox ID="DOB" runat="server" CssClass='form-control' placeholder="Enter date of birth"   ></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ValidationGroup="j" ControlToValidate="DOB" ErrorMessage="*" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>			
+                     
+				</div>
+
+
+                        <div class="clearfix"></div>
+                        <br /><br /> 
+                                     
+                
+                <div class="col-md-4">
+					 <asp:TextBox ID="Mobile" runat="server" CssClass='form-control' TextMode="Number" placeholder="Mobile"></asp:TextBox>
+	                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ValidationGroup="j" runat="server" ControlToValidate="Mobile" ErrorMessage="*" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>			
+                </div>
+              
+
+
+                <div class="col-md-4">
+					 <asp:TextBox ID="adhar" runat="server" CssClass='form-control' TextMode="Number" placeholder="Please enter adhar No."></asp:TextBox>
+	                     <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ValidationGroup="j" runat="server" ControlToValidate="adhar" ErrorMessage="*" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>			
+                </div>
+
+
+                         <div class="col-md-4">
+					 <asp:TextBox ID="userid" runat="server" CssClass='form-control'  placeholder="Please enter user Id"></asp:TextBox>
+	                     <asp:RequiredFieldValidator ID="RequiredFieldValidator8" ValidationGroup="j" runat="server" ControlToValidate="userid" ErrorMessage="*" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>			
+                </div>
+               
+                         <div class="clearfix"></div>
+                        <br /><br /> 
+              
+
+                <div class="col-md-4">
+                    <asp:TextBox ID="password" runat="server" CssClass='form-control' placeholder="Password" TextMode="Password"></asp:TextBox>
+				     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ValidationGroup="j" runat="server" ControlToValidate="password" ErrorMessage="*" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                </div>
+
+                        
+
+                <div class="col-md-4">
+                    <asp:TextBox ID="Email" runat="server" CssClass='form-control' placeholder="Enter Email" ></asp:TextBox>
+				    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ValidationGroup="j" runat="server" ControlToValidate="email" ErrorMessage="*" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                </div>
+                
+
+
+                 <div class="col-md-4">
+                  <asp:DropDownList ID ="gender" runat="server"  style="width:100%;height:40px;">
+                       <asp:ListItem Selected="true">--select--</asp:ListItem>
+                      <asp:ListItem>Male</asp:ListItem>
+                      <asp:ListItem>Female</asp:ListItem>
+                      <asp:ListItem>Other</asp:ListItem>
+                  </asp:DropDownList>
+				    <asp:RequiredFieldValidator ID="RequiredFieldValidator11" ValidationGroup="j" CssClass="form-control" runat="server" InitialValue="--select--" ControlToValidate="password" ErrorMessage="*" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                </div>
+              
+                         <div class="clearfix"></div>
+                        <br /> <br />
+               
+
+                 <div class="col-md-4">
+                          <asp:FileUpload ID="pic" runat="server" onchange="previewFile()"  CssClass="form-control" style="width:100%;height:40px;"/>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*" ControlToValidate="pic"
+                                ValidationGroup="j" ForeColor="Red" ToolTip="Please upload photo of meter"></asp:RequiredFieldValidator>
+                            <%--<asp:Image ID="Image1" runat="server" Height="80px" Width="80px" />--%>
+                        </div>
+
+                        
+
+
+
+				<div class="col-md-12 text-cemtre" style="padding-right:180px;">
+                    <asp:Button ID="submit"  Text="Submit" ValidationGroup="j" runat="server" CssClass="btn-danger"  OnClick="submit_Click"/>
+				</div>
+               
+                        <div class="col-md-12 text-centre">
+                 <p class="signup">Already a customer? <a href="reg.aspx" class="signuplink">Login now</a></p>
+			</div>
+                        </div>
+		</div>	
+
+          
+          </section>
+</asp:Content>
+
